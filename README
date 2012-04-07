@@ -1,0 +1,32 @@
+Roadcrew.js
+===================
+
+Roadcrew.js is a simple JavaScript snippet which allows
+"page transitions" like in jQuery mobile. It means,
+you can have multiple divs in a HTML5 document which
+serve as "pages". Roadcrew.js allows you to navigate
+between them. 
+
+It does not allow you to include divs via Ajax.
+
+Currently there is only one transition animation: fadeIn.
+This is a jQuery animation. Because Roadcrew.js is so 
+simple, you can easily remove this animation or
+add your own.
+
+Roadcrew.js has been developed because jQuery mobile
+was very slow on my mobiles. The only feature I would
+miss was the page feature, which is now available with
+Roadcrew.js.
+
+My current stack for HTML5 dev on mobile is now:
+
+- Apache Cordova (was Phonegap)
+- Roadcrew.js
+- Promise.js (https://github.com/stackp/promisejs) for AJAX (see also: http://bit.ly/HbKRU4)
+- Twitter Bootstrap
+- jQuery
+
+I plan to remove jQuery in favour to Zepto.js: http://zeptojs.com/
+In other terms: Roadcrew.js will have Zepto.js support too.
+Plans are to keep jQuery support for this library.
