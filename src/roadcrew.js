@@ -6,7 +6,7 @@ function Roadcrew() {
 
    $(window).bind('popstate', $.proxy(this, 'back'));
    $("a").live('click', $.proxy(this, 'goto'));
-};
+}
 
 Roadcrew.prototype = {
    pages : null,
@@ -33,7 +33,7 @@ Roadcrew.prototype.flip = function (page) {
    this.active.css('display','none');
    this.active = $(page);
    this.active.fadeIn();  
-}
+};
 
 Roadcrew.prototype.back = function(event) {
    if(this.path.length == 0) {
@@ -45,4 +45,4 @@ Roadcrew.prototype.back = function(event) {
       this.flip(url);   
    } 
    this.path.pop();
-}
+};
