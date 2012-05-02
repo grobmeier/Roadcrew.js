@@ -20,6 +20,13 @@ Roadcrew.prototype.intercept = function (url, interceptor) {
    this.interceptor[url] = interceptor;
 };
 
+Roadcrew.createDispatcher = function (target, url) {
+   var rd = new RoadcrewDispatcher(target, url);
+   var dispatcher = function() {
+      rd.dispatch();
+   }
+   return dispatcher;
+};
 
 Roadcrew.prototype.goto = function (event) {
    var url = null;
@@ -36,12 +43,8 @@ Roadcrew.prototype.goto = function (event) {
    var interceptor = this.interceptor[url];
 
    if(interceptor !== undefined) {
-      var t = this;
-      var dispatch = function() {
-         t.flip(url);
-      };
-      dispatch.target = url;
-      interceptor(dispatch);  
+      var dispatcher = Roadcrew.createDispatcher(this, url);
+      interceptor(dispatcher);
    } else {
       this.flip(url);  
    }
@@ -63,4 +66,19 @@ Roadcrew.prototype.back = function(event) {
       this.flip(url);   
    } 
    this.path.pop();
+};
+
+function RoadcrewDispatcher(target, url) {
+    this.target = target;
+    this.url = url;
+}
+
+RoadcrewDispatcher.prototype = {
+    target : null,
+    url : null
+
+};
+
+RoadcrewDispatcher.prototype.dispatch = function() {
+    this.target.flip(this.url);
 };

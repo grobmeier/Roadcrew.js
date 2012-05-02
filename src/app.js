@@ -4,7 +4,6 @@ $(document).ready( function() {
    
    roadcrew.intercept('#tablePage', function(dispatch) {
       roadcrew.flip('#loadingPage');
-      console.log("Heading to: " + dispatch.target);
       setTimeout(dispatch,3000);
    });
    
