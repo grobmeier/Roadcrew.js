@@ -39,7 +39,7 @@ Roadcrew.prototype.goto = function (event) {
       var t = this;
       var dispatch = function() {
          t.flip(url);
-      }
+      };
       dispatch.target = url;
       interceptor(dispatch);  
    } else {
