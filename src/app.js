@@ -3,8 +3,9 @@ $(document).ready( function() {
    var roadcrew = new Roadcrew();
    
    roadcrew.intercept('#tablePage', function(dispatch) {
-      alert("OK" + dispatch.target);
-      dispatch();
+      roadcrew.flip('#loadingPage');
+      console.log("Heading to: " + dispatch.target);
+      setTimeout(dispatch,3000);
    });
    
    var submit = $('#myform').find('[name="submit"]');
@@ -12,5 +13,4 @@ $(document).ready( function() {
       event.preventDefault();
       roadcrew.goto("#tablePage");
    });
-
 });
