@@ -12,8 +12,14 @@ Roadcrew.prototype = {
    pages : null,
    active : null,
    path : [],
-   start: null  
+   start: null,
+   interceptor : {}  
 };
+
+Roadcrew.prototype.intercept = function (url, interceptor) {
+   this.interceptor[url] = interceptor;
+};
+
 
 Roadcrew.prototype.goto = function (event) {
    var url = null;
@@ -26,7 +32,19 @@ Roadcrew.prototype.goto = function (event) {
       }
    }
    this.path.push(url);
-   this.flip(url);
+   
+   var interceptor = this.interceptor[url];
+
+   if(interceptor !== undefined) {
+      var t = this;
+      var dispatch = function() {
+         t.flip(url);
+      }
+      dispatch.target = url;
+      interceptor(dispatch);  
+   } else {
+      this.flip(url);  
+   }
 };
 
 Roadcrew.prototype.flip = function (page) {
