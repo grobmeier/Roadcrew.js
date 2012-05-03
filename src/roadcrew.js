@@ -53,7 +53,7 @@ Roadcrew.prototype.goto = function (event) {
 Roadcrew.prototype.flip = function (page) {
    this.active.css('display','none');
    this.active = $(page);
-   this.active.show();
+   this.active.css('display','block');
 };
 
 Roadcrew.prototype.fadeIn = function (page) {
