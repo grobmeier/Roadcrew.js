@@ -8,7 +8,12 @@
 #stage {
 	width:400px;
 	height:600px;
-	overflow:hidden;
+	overflow: scroll;
+   -webkit-overflow-scrolling: touch;
+}
+
+.navbar-fixed-top {
+  position: fixed;  
 }
 
 .content {
