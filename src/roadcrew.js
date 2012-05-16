@@ -43,7 +43,7 @@ Roadcrew.createDispatcher = function (target, url) {
    return dispatcher;
 };
 
-Roadcrew.prototype.goto = function (event) {
+Roadcrew.prototype.goto = function (event, data) {
    var url = null;
    if(typeof (event) === "string") {
         url = event;
@@ -60,7 +60,7 @@ Roadcrew.prototype.goto = function (event) {
    if(interceptor !== undefined) {
        try {
            var dispatcher = Roadcrew.createDispatcher(this, url);
-           interceptor(dispatcher);
+           interceptor(dispatcher, data);
        } catch (error) {
            var errorHandler = this.errorHandler[url];
            if(errorHandler === undefined || errorHandler === null) {
