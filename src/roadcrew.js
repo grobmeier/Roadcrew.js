@@ -37,10 +37,9 @@ Roadcrew.prototype.intercept = function (url, interceptor, errorHandler) {
 
 Roadcrew.createDispatcher = function (target, url) {
    var rd = new RoadcrewDispatcher(target, url);
-   var dispatcher = function() {
+   return function() {
       rd.dispatch();
    };
-   return dispatcher;
 };
 
 Roadcrew.prototype.goto = function (event, data) {
@@ -101,16 +100,7 @@ Roadcrew.prototype.back = function(event) {
 };
 
 function RoadcrewDispatcher(target, url) {
-    this.target = target;
-    this.url = url;
+    this.dispatch = function() {
+        target.flip(url);
+    };
 }
-
-RoadcrewDispatcher.prototype = {
-    target : null,
-    url : null
-
-};
-
-RoadcrewDispatcher.prototype.dispatch = function() {
-    this.target.flip(this.url);
-};
