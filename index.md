@@ -6,10 +6,13 @@ Welcome to Roadcrew.js
 ======================
 
 Roadcrew.js is a small JavaScript component which lets you switch pages of an single file website.
-This is very useful in combination with for example <a href="http://cordova.apache.org">Apache Cordova</a>.
+This is very useful in combination with for example [Apache Cordova](http://cordova.apache.org).
 While you are of course able to jump between different HTML files with Cordova, it is often more efficient
 not to reload the whole view and just show the div elements you need. Doing so you'll keep the state of you
 Application.
+
+[Please read the docs](documentation.html) for more information.
+
 
 Why not something else?
 -----------------------
