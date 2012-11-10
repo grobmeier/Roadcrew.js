@@ -26,6 +26,12 @@ I listened to "We are the Roadcrew" from Motörhead when I started to the coding
 Motörhead and do have not named other Open Source projects after Motörhead songs, but "Roadcrew" seems
 to be very matching when writing a framework which deals with mobile.
 
+License
+-------
+
+Apache License 2.0
+
+
 The Author
 ----------
 
