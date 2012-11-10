@@ -45,3 +45,13 @@ switch pages from login to content with clicking this link:
 ```html
 <a href="#content">Leads to content</a>
 ```
+
+{ % highlight html %}
+<a href="#content">Leads to content</a>
+{ % endhighlight %}
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
