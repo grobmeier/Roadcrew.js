@@ -3,91 +3,93 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Roadcrew Demo</title>
 
     <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="roadcrew.js"></script>
     <script type="text/javascript" charset="utf-8" src="app.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="bootstrap-2.0.2/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="bootstrap-2.0.2/css/bootstrap-responsive.min.css"/>
     <link rel="stylesheet" type="text/css" href="roadcrew.css"/>
 </head>
-<body id="stage">
-
-<!--
-   Page 1: Loading
--->
-<div class="page" id="loadingPage">
-    <div data-role="header"><h1>Demo App</h1></div>
-    <div data-role="content">
-        <div align="center">
-            <p>Please wait.</p>
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <span class="brand">Demo App</span>
         </div>
     </div>
 </div>
-
-<!--
-    Page 2
--->
-<div class="page start" id="appPage">
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-         <div class="container-fluid">
-         <span class="brand">Demo App</span>
-         </div>
-      </div>
+<div class="content container-fluid">
+    <!--
+       Page 1: Loading
+    -->
+    <div class="row page" id="loadingPage">
+        <div class="span4" align="center">
+            <p>Please wait.</p>
+        </div>
     </div>
-    <div class="content container-fluid">
-         <div class="error"></div>
-         <form id="myform" action="#" method="post">
-               <label for="field1">Field 1:</label>
-               <input type="text" name="field1" id="field1" value=""/>
-               <label for="field2">Field 2:</label>
-               <input type="text" name="field2" id="field2" value=""/>
-               <label for="yesorno">Yes or no?</label>
-               <input type="checkbox" name="yesorno" id="yesorno" />
-               
-               <br/>
-               <input type="submit" name="submit" class="btn btn-primary" value="Send Data"/>
-         </form>
-         
-         <a href="#tablePage">Go to tables</a>
+
+    <!--
+        Page 2
+    -->
+    <div class="row page start" id="appPage">
+        <div class="span4">
+            <div class="error"></div>
+            <form id="myform" action="#" method="post">
+                <label for="field1">Field 1:</label>
+                <input type="text" name="field1" id="field1" value=""/>
+                <label for="field2">Field 2:</label>
+                <input type="text" name="field2" id="field2" value=""/>
+                <label for="yesorno">Yes or no?</label>
+                <input type="checkbox" name="yesorno" id="yesorno"/>
+
+                <br/>
+                <input type="submit" name="submit" class="btn btn-primary" value="Send Data"/>
+            </form>
+
+            <a href="#tablePage">Go to tables</a>
+        </div>
+    </div>
+
+    <!--
+        Page 3
+    -->
+    <div class="row page" id="tablePage">
+        <div class="span4">
+            <table border="1" width="100%">
+                <tr>
+                    <th>Hello</th>
+                    <th>World</th>
+                </tr>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                </tr>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                </tr>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                </tr>
+            </table>
+            <a href="#otherPage">Other page</a>
+        </div>
+    </div>
+
+    <!--
+        Page 3
+    -->
+    <div data-role="row page" class="page" id="otherPage">
+        <div class="span12">
+            <h1>Other</h1>
+            <a href="#tablePage">Table page</a>
+        </div>
     </div>
 </div>
-
-<!--
-    Page 3
--->
-<div class="page" id="tablePage">
-    <div class="header"><h1>Demo App</h1></div>
-    <div class="content">
-      <table>
-      <tr>
-         <th>Hello</th>
-         <th>World</th>
-      </tr>
-      <tr>
-         <td>Value 1</td>
-         <td>Value 2</td>
-      </tr>   
-      </table>
-      <a href="#otherPage">Other page</a>
-    </div>
-</div>
-
-<!--
-    Page 3
--->
-<div data-role="page" class="page" id="otherPage">
-    <div class="header"><h1>Demo App</h1></div>
-    <div class="content">
-      <h1>Other</h1>
-      <a href="#tablePage">Table page</a>
-    </div>
-</div>
-
-
 </body>
 </html>
