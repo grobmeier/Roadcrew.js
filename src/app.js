@@ -4,7 +4,7 @@ $(document).ready( function() {
    
    roadcrew.intercept('#tablePage', function(dispatch) {
       roadcrew.flip('#loadingPage');
-      setTimeout(dispatch,3000);
+      setTimeout(dispatch,1500);
    });
    
    var submit = $('#myform').find('[name="submit"]');
