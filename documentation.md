@@ -65,7 +65,7 @@ This interceptor will be called right before the transition to the page with the
 
 After the actions has been done, it is important to execute the dispatch function which has been passed on as callback. It contains the actual dispatching function, which will finally switch your page.
 
-If you would like to something AJAX like, you can do it like that:
+If you would like to something AJAX like, you can do it that way:
 
 {% highlight javascript %}
 var roadcrew = new Roadcrew();
