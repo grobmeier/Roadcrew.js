@@ -12,4 +12,17 @@ $(document).ready( function() {
       event.preventDefault();
       roadcrew.goto("#tablePage");
    });
+
+  roadcrew.intercept('#interceptingPage', function(dispatch) {
+      console.log("Intercepting");
+      dispatch();
+  });
+
+  roadcrew.intercept('#troublePage', function(dispatch) {
+      throw new RoadcrewError("I made trouble");
+  }, function(error) {
+      $('#errorPage').find('.error').html(error.message);
+      roadcrew.flip('#errorPage');
+  });
+
 });

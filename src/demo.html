@@ -51,6 +51,8 @@
             </form>
 
             <a href="#tablePage">Go to tables</a>
+            <br/>
+            <a href="#troublePage" class="btn btn-danger">This asks for trouble</a>
         </div>
     </div>
 
@@ -78,6 +80,7 @@
                 </tr>
             </table>
             <a href="#otherPage">Other page</a>
+            <a href="#interceptingPage">Intercepting page</a>
         </div>
     </div>
 
@@ -88,6 +91,37 @@
         <div class="span12">
             <h1>Other</h1>
             <a href="#tablePage">Table page</a>
+        </div>
+    </div>
+
+    <!--
+        Page 4: intercepting
+    -->
+    <div data-role="row page" class="page" id="interceptingPage">
+        <div class="span12">
+            <h1>Intercepting</h1>
+            <a href="#tablePage">Table page</a>
+        </div>
+    </div>
+
+    <!--
+        Page 5: troubling interceptor
+    -->
+    <div data-role="row page" class="page" id="troublePage">
+        <div class="span12">
+            <h1>Trouble Page</h1>
+            Show never be visible
+        </div>
+    </div>
+
+    <!--
+        Page 6: Should show in case of an error
+    -->
+    <div data-role="row page" class="page" id="errorPage">
+        <div class="span12">
+            <h1>Error Page</h1>
+            Mate, you have a problem!<br/>
+            <span class="error">errortext</span>
         </div>
     </div>
 </div>

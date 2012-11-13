@@ -29,7 +29,7 @@ Roadcrew.prototype = {
 };
 
 Roadcrew.prototype.intercept = function (url, interceptor, errorHandler) {
-   this.interceptor[url] = interceptor;
+    this.interceptor[url] = interceptor;
     if(errorHandler !== null && errorHandler !== undefined) {
         this.errorHandler[url] = errorHandler;
     }
