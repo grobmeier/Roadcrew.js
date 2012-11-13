@@ -12,46 +12,37 @@ Getting started
 [Download a stable version](https://github.com/grobmeier/Roadcrew.js/downloads) or get the latest source balls on
 top right. Include Roadcrew.js in your HTML file, like with:
 
-```html
+{% highlight html %}
 <script type="text/javascript" charset="utf-8" src="roadcrew.js"></script>
 <script type="text/javascript" charset="utf-8" src="app.js"></script>
-```
+{% endhighlight %}
 
 Now make up some divs which serve as pages in Roadcrew. Like:
 
-```html
+{% highlight html %}
 <div class="page start" id="login">
 ...
 </div>
 <div class="page" id="content">
 ...
 </div>
-```
+{% endhighlight %}
 
 All Roadcrew pages need the CSS class "page". You should not nest pages. The first page you want to show needs the CSS
 class "start" in addition.
 
 Finally you have to start Roadcrew.js:
 
-```javascript
+{% highlight javascript %}
 $(document).ready( function() {
    var roadcrew = new Roadcrew();
 }
-```
+{% endhighlight %} 
 
 The IDs are being used to identify your pages. These are also used to build an URL. For example, you can
 switch pages from login to content with clicking this link:
 
-```html
+{% highlight html %}
 <a href="#content">Leads to content</a>
-```
+{% endhighlight %}
 
-{ % highlight html %}
-<a href="#content">Leads to content</a>
-{ % endhighlight %}
-
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
-```
