@@ -77,4 +77,47 @@ roadcrew.intercept('#interceptingPage', function(dispatch) {
 });
 {% endhighlight %}
 
+Error Handling
+--------------
+
+While you are intercepting pages you might run into trouble. To catch them accordingly you can create an error handler for each interceptor. Just pass the error handler function as second argument.
+
+{% highlight javascript %}
+roadcrew.intercept('#troublePage', function(dispatch) {
+   throw new RoadcrewError("I made trouble");
+}, function(error) {
+   $('#errorPage').find('.error').html(error.message);
+   roadcrew.flip('#errorPage');
+});
+{% endhighlight %}
+
+In the case above you would intercept the troublePage. But an error occurs. To simulate it, I am just throwing an RoadcrewError. You can utilize this Error if you like or throw another exception to your taste.
+
+The second callback is the error callback. When an error is catched it will executed. The argument is the instance we have thrown as RoadcrewError. That way you are able to pass some more information to the error handler.
+
+Global Error Handling
+---------------------
+
+Sometimes things are not working in such a coordinated way. Maybe a pretty unexpected problem occurs and you want to deal with them. This is the time when a global error handler comes in play.
+
+A simple version might look like this:
+
+{% highlight javascript %}
+roadcrew.globalErrorHandler = function (error) {
+   $('#errorPage').find('.error').html("uncatched error");
+   roadcrew.flip('#errorPage');
+}
+{% endhighlight %}
+
+This error handler would be called if no specific error handler can be found. A page which might run into this error handler will most likely not have an own error handler.
+
+{% highlight javascript %}
+roadcrew.intercept('#evenMoreTroublePage', function (dispatch) {
+   throw new RoadcrewError("Even more trouble");
+});
+{% endhighlight %}
+
+Once set, the global error handler is responsible for all occuring errors from the dispatchers. So be prepared. 
+
+The example implementation itself does open the errorPage and updates a little bit text. 
 
