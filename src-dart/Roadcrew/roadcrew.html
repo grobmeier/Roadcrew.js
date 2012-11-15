@@ -1,0 +1,157 @@
+<!--
+/*
+ *  Copyright 2012 Christian Grobmeier
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed
+ *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ *  either express or implied. See the License for the specific
+ *  language governing permissions and limitations under the License.
+ */
+ -->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dartcrew Demo</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap-2.0.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="bootstrap-2.0.2/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" type="text/css" href="roadcrew.css"/>
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <span class="brand"><a href="#appPage">Demo App</a></span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="margin-top: 60px">
+    <!--
+       Page 1: Loading
+    -->
+    <div class="row page" id="loadingPage">
+        <div class="span4" align="center">
+            <p>Please wait.</p>
+        </div>
+    </div>
+
+    <!--
+        Page 2
+    -->
+    <div class="row page start" id="appPage">
+        <div class="span4">
+            <div class="error"></div>
+            <form id="myform" action="#" method="post">
+                <label for="field1">Field 1:</label>
+                <input type="text" name="field1" id="field1" value=""/>
+                <label for="field2">Field 2:</label>
+                <input type="text" name="field2" id="field2" value=""/>
+                <label for="yesorno">Yes or no?</label>
+                <input type="checkbox" name="yesorno" id="yesorno"/>
+
+                <br/>
+                <input type="submit" name="submit" class="btn btn-primary" value="Send Data"/>
+            </form>
+
+            <p><a href="#tablePage">Go to tables</a></p>
+            <p><a href="#troublePage" class="btn btn-danger">This asks for trouble</a></p>
+            <p><a href="#evenMoreTroublePage" class="btn btn-danger">This asks for even more trouble</a></p>
+        </div>
+    </div>
+
+    <!--
+        Page 3
+    -->
+    <div class="row page" id="tablePage">
+        <div class="span4">
+            <table border="1" width="100%">
+                <tr>
+                    <th>Hello</th>
+                    <th>World</th>
+                </tr>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                </tr>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                </tr>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                </tr>
+            </table>
+            <a href="#otherPage">Other page</a>
+            <a href="#interceptingPage">Intercepting page</a>
+        </div>
+    </div>
+
+    <!--
+        Page 3
+    -->
+    <div data-role="row page" class="page" id="otherPage">
+        <div class="span12">
+            <h1>Other</h1>
+            <a href="#tablePage">Table page</a>
+        </div>
+    </div>
+
+    <!--
+        Page 4: intercepting
+    -->
+    <div data-role="row page" class="page" id="interceptingPage">
+        <div class="span12">
+            <h1>Intercepting</h1>
+            <a href="#tablePage">Table page</a>
+        </div>
+    </div>
+
+    <!--
+        Page 5: troubling interceptor
+    -->
+    <div data-role="row page" class="page" id="troublePage">
+        <div class="span12">
+            <h1>Trouble Page</h1>
+            Show never be visible
+        </div>
+    </div>
+
+    <!--
+        Page 6: Should show in case of an error
+    -->
+    <div data-role="row page" class="page" id="errorPage">
+        <div class="span12">
+            <h1>Error Page</h1>
+            Mate, you have a problem!<br/>
+            <span class="error">errortext</span>
+            <p><a class="btn btn-primary" href="#appPage">Home</a></p>
+        </div>
+    </div>
+
+    <div data-role="row page" class="page" id="evenMoreTroublePage">
+        <div class="span12">
+            <h1>Extrem Trouble Page</h1>
+            Show never be visible
+        </div>
+    </div>
+
+    <script type="application/dart" src="web/App.dart"></script>
+    <script src="https://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
+
+  <!--
+    <script type="text/javascript" charset="utf-8" src="web/App.dart.js"></script>
+    -->
+</div>
+</body>
+</html>
