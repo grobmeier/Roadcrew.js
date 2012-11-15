@@ -19,39 +19,39 @@ import 'dart:html';
 import 'Roadcrew.dart';
 
 void main() {
-  RoadcrewController Roadcrew = new RoadcrewController();
+  RoadcrewController roadcrew = new RoadcrewController();
 
   query('#myform').on.submit.add((e) {
     e.preventDefault();
-    Roadcrew.goto('#tablePage');
+    roadcrew.goto('#tablePage');
   });
 
-  Roadcrew.intercept('#tablePage', new RoadcrewInterceptor(_(dispatcher) {
-    Roadcrew.flipToUrl('#loadingPage');
+  roadcrew.intercept('#tablePage', new RoadcrewInterceptor(_(dispatcher) {
+    roadcrew.flipToUrl('#loadingPage');
     window.setTimeout(dispatcher, 1500);
   }));
 
-  Roadcrew.intercept('#interceptingPage', new RoadcrewInterceptor(_(dispatcher) {
+  roadcrew.intercept('#interceptingPage', new RoadcrewInterceptor(_(dispatcher) {
     print("PRE INTECEPTING");
     dispatcher();
     print("POST INTECEPTING");
   }));
 
-  Roadcrew.intercept('#troublePage', new RoadcrewInterceptor(_(dispatcher) {
+  roadcrew.intercept('#troublePage', new RoadcrewInterceptor(_(dispatcher) {
     throw new RoadcrewException("I made trouble");
   }), (e) {
     DivElement errorPage = query('#errorPage');
     errorPage.query('.error').text = e.message;
-    Roadcrew.flip(errorPage);
+    roadcrew.flip(errorPage);
   });
 
-  Roadcrew.intercept('#evenMoreTroublePage', new RoadcrewInterceptor(_(dispatcher) {
+  roadcrew.intercept('#evenMoreTroublePage', new RoadcrewInterceptor(_(dispatcher) {
     throw new RoadcrewException("Even more trouble");
   }));
 
-  Roadcrew.globalErrorHandler = (e) {
+  roadcrew.globalErrorHandler = (e) {
     DivElement errorPage = query('#errorPage');
     errorPage.query('.error').text = e.message;
-    Roadcrew.flip(errorPage);
+    roadcrew.flip(errorPage);
   };
 }
