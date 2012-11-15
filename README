@@ -1,25 +1,37 @@
-Roadcrew.js
-===================
+Roadcrew.js / Roadcrew.dart
+===========================
 
 Roadcrew.js is a simple JavaScript snippet which allows
 "page transitions" like in jQuery mobile. It means,
 you can have multiple divs in a HTML5 document which
 serve as "pages". Roadcrew.js allows you to navigate
-between them. 
+between them.
 
-It does not allow you to include divs via Ajax.
+Roadcrew.dart is the same, just in Dart (http://www.dartlang.org).
+Personally I think this language is just great and I really enjoyed
+working with it.
 
-Currently there is only one transition animation: fadeIn.
-This is a jQuery animation. Because Roadcrew.js is so 
-simple, you can easily remove this animation or
-add your own.
+Roadcrew does not allow you to load new divs via Ajax.
+
+Currently there is only one "transition" effect: flip, without anything.
+
+
+Why?
+----
 
 Roadcrew.js has been developed because jQuery mobile
 was very slow on my mobiles. The only feature I would
 miss was the page feature, which is now available with
 Roadcrew.js.
 
-My current stack for HTML5 dev on mobile is now:
+Roadcrew.dart has been developed because I love Dart.
+
+
+Current stack for mobile
+------------------------
+
+Not that anybody wants to hear it. Lucky me, README files can be huge. So I can tell the
+world about my current stack for HTML5 dev on mobile.
 
 - Apache Cordova (was Phonegap)
 - Roadcrew.js
@@ -27,6 +39,14 @@ My current stack for HTML5 dev on mobile is now:
 - Twitter Bootstrap
 - jQuery
 
+
+
+Future
+------
+
 I plan to remove jQuery in favour to Zepto.js: http://zeptojs.com/
 In other terms: Roadcrew.js will have Zepto.js support too.
 Plans are to keep jQuery support for this library.
+
+For Roadcrew.dart I was thinking about creating bindings for Apache Cordova. That said, Dart is still in
+it early days and the Roadcrew.dart development will reflect that.
