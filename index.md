@@ -11,7 +11,18 @@ While you are of course able to jump between different HTML files with Cordova, 
 not to reload the whole view and just show the div elements you need. Doing so you'll keep the state of you
 Application.
 
-[Please read the docs](documentation.html) for more information.
+Roadcrew.dart is the same, just in [Dartlang](http://www.dartlang.org).
+
+Please read [the Roadcrew.js docs](documentation.html) or the [Roadcrew.dart docs](documentation-dart.html) for more information.
+
+Dependencies
+------------
+
+Roadcrew.js does make use of jQuery (tested with 1.7.2).
+
+It's basically using selectors and the css() method to manipulate the elements. There is bind(), live() and proxy() in use too. Plans are to reduce relations to jQuery to a minimum so it can be used with Zepto.js one day. Patches welcome!
+
+Roadcrew.dart just needs Dart. Batteries included.
 
 
 Why not something else?
@@ -29,6 +40,9 @@ I listened to "We are the Roadcrew" from Motörhead when I started to the coding
 Motörhead and do have not named other Open Source projects after Motörhead songs, but "Roadcrew" seems
 to be very matching when writing a framework which deals with mobile.
 
+When I ported Roadcrew.js to Roadcrew.dart I listened a lot to Nine Inch Nails. I decided to stick with 
+the Motörhead name to avoid confusion.
+
 License
 -------
 
@@ -38,5 +52,5 @@ Apache License 2.0
 The Author
 ----------
 
-Roadcrew.js has been developed by Christian Grobmeier. He is [on Github](https://github.com/grobmeier),
+Roadcrew.js and Roadcrew.dart has been developed by Christian Grobmeier. He is [on Github](https://github.com/grobmeier),
 [writes on Twitter](http://twitter.com/grobmeier) and of course [maintains a blog](http://www.grobmeier.de).
