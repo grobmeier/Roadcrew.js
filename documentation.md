@@ -40,10 +40,12 @@ $(document).ready( function() {
 {% endhighlight %} 
 
 The IDs are being used to identify your pages. These are also used to build an URL. For example, you can
-switch pages from login to content with clicking this link:
+switch pages from login to content with clicking this link and a defined data-target attribute. In previous versions
+the href="" attribute has been used to identify the target, but it could be shown that some jQuery plugins might depend
+to this attribute too.
 
 {% highlight html %}
-<a href="#content">Leads to content</a>
+<a data-target="#content" href="#">Leads to content</a>
 {% endhighlight %}
 
 
