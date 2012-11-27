@@ -64,7 +64,7 @@ Roadcrew.prototype.goto = function (event, data) {
    } else {
       event.preventDefault();
       if (event.target.nodeName == 'A') {
-         url = event.target.getAttribute('href'); 
+         url = event.target.getAttribute('data-target');
       }
    }
    this.path.push(url);
