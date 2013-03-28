@@ -24,7 +24,6 @@ RoadcrewError.prototype = new Error();
 RoadcrewError.prototype.constructor = RoadcrewError;
 
 function Roadcrew() {
-   this.pages = $('.page');
    $('[data-rc-partial]').addClass("rc-unloaded-partial");
 
    this.active = $($('.start')[0]);
@@ -36,10 +35,7 @@ function Roadcrew() {
 }
 
 Roadcrew.prototype = {
-   pages : null,
-   active : null,
    path : [],
-   start: null,
    interceptor : {},
    globalErrorHandler : null,
    errorHandler : {}
@@ -67,7 +63,6 @@ Roadcrew.prototype.goto = function (event, data) {
       event.preventDefault();
       if (event.target.nodeName == 'A') {
          url = event.target.getAttribute('data-target');
-
       }
    }
 
