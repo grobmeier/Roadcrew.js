@@ -79,6 +79,23 @@ roadcrew.intercept('#interceptingPage', function(dispatch) {
 });
 {% endhighlight %}
 
+
+Loading Partials
+----------------
+
+Partials are HTML snippets for your application which should be loaded at runtime.
+In other terms, it is possible to keep your index.html short with using a lot of partials.
+
+Partials are defined like this:
+
+{% highlight html %}
+<div class="page" id="notDefined" data-rc-partial="partial1.html"></div>
+{% endhighlight %}
+
+They are basically defined like a standard page in Roadcrew. Just that they
+have an additional data-tag called data-rc-partial which defines the location of your
+partial. The content of this file will be put inside the div tag.
+
 Error Handling
 --------------
 
