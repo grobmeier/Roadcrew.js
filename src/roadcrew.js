@@ -82,7 +82,7 @@ Roadcrew.prototype.goto = function (event, data) {
 
    if(interceptor !== undefined) {
        try {
-           var dispatcher = Roadcrew.createDispatcher(this, url);
+           var dispatcher = Roadcrew.createDispatcher(this, page);
            interceptor(dispatcher, data);
        } catch (error) {
            var errorHandler = this.errorHandler[url];
@@ -95,20 +95,27 @@ Roadcrew.prototype.goto = function (event, data) {
            }
        }
    } else {
-      this.flip(url);  
+      this.flip(page);
    }
 };
 
 Roadcrew.prototype.flip = function (page) {
    this.active.css('display','none');
-   this.active = $(page);
+   this.active = this.verifyPage(page);
    this.active.css('display','block');
 };
 
 Roadcrew.prototype.fadeIn = function (page) {
    this.active.css('display','none');
-   this.active = $(page);
+   this.active = this.verifyPage(page);
    this.active.fadeIn();
+};
+
+Roadcrew.prototype.verifyPage = function(page) {
+    if( typeof (page) === "string") {
+        return $(page);
+    }
+    return page;
 };
 
 Roadcrew.prototype.back = function(event) {
@@ -123,8 +130,8 @@ Roadcrew.prototype.back = function(event) {
    this.path.pop();
 };
 
-function RoadcrewDispatcher(target, url) {
+function RoadcrewDispatcher(target, page) {
     this.dispatch = function() {
-        target.flip(url);
+        target.flip(page);
     };
 }
