@@ -1,0 +1,18 @@
+var fs = require('fs');
+
+desc('Minify JS');
+task('minify', [], function () {
+    var uglify = require('uglify-js');
+    var files = ['roadcrew.js'];
+
+    var result = uglify.minify(files);
+
+    fs.mkdir('target', function() {
+        fs.writeFile('target/roadcrew.min.js', result.code, function() {
+            console.log("Minified Roadcrew.js (without dependencies)");
+        });
+
+    });
+
+
+});
