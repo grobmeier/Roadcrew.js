@@ -25,6 +25,8 @@ RoadcrewError.prototype.constructor = RoadcrewError;
 
 function Roadcrew() {
    this.pages = $('.page');
+   $('[data-rc-partial]').addClass("rc-unloaded-partial");
+
    this.active = $($('.start')[0]);
    this.start = "#" + this.active.attr('id');
    this.active.css('display', 'block');
@@ -73,7 +75,13 @@ Roadcrew.prototype.goto = function (event, data) {
        return;
    }
 
-    this.path.push(url);
+   this.path.push(url);
+
+   var page = $(url);
+   if (page.hasClass("rc-unloaded-partial")) {
+       page.load(page.attr("data-rc-partial"));
+       page.removeClass("rc-unloaded-partial");
+   }
 
    var interceptor = this.interceptor[url];
 
