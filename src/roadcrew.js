@@ -32,6 +32,15 @@ function Roadcrew() {
 
    $(window).bind('popstate', $.proxy(this, 'back'));
    $(document).on('click', "a", $.proxy(this, 'goto'));
+
+    // In page templates
+    $.each($('.template-ref'), function (index, value) {
+        var elem = $(value);
+        var target = elem.attr("data-target");
+        if (target !== undefined) {
+            elem.html($("#" + target).html());
+        }
+    });
 }
 
 Roadcrew.prototype = {
