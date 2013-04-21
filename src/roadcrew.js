@@ -32,6 +32,7 @@ function Roadcrew() {
 
    $(window).bind('popstate', $.proxy(this, 'back'));
    $(document).on('click', "a", $.proxy(this, 'goto'));
+    $(document).on('click', "button[data-target]", $.proxy(this, 'goto'));
 
     // In page templates
     $.each($('.template-ref'), function (index, value) {
@@ -70,7 +71,7 @@ Roadcrew.prototype.goto = function (event, data) {
         url = event;
    } else {
       event.preventDefault();
-      if (event.target.nodeName == 'A') {
+       if (event.target.nodeName == 'A' || event.target.nodeName == 'BUTTON' || $(event.target).parent().prop("tagName") == 'BUTTON' ) {
          url = event.target.getAttribute('data-target');
       }
    }
