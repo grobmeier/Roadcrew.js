@@ -71,8 +71,10 @@ Roadcrew.prototype.goto = function (event, data) {
         url = event;
    } else {
       event.preventDefault();
-       if (event.target.nodeName == 'A' || event.target.nodeName == 'BUTTON' || $(event.target).parent().prop("tagName") == 'BUTTON' ) {
-         url = event.target.getAttribute('data-target');
+      if (event.target.nodeName == 'A' || event.target.nodeName == 'BUTTON') {
+        url = event.target.getAttribute('data-target');
+      } else if($(event.target).parent().prop("tagName") == 'BUTTON' ) {
+          url = $(event.target).parent().attr('data-target');
       }
    }
 
