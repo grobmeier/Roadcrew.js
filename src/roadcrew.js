@@ -31,7 +31,7 @@ function Roadcrew() {
    this.active.css('display', 'block');
 
    $(window).bind('popstate', $.proxy(this, 'back'));
-   $("a").live('click', $.proxy(this, 'goto'));
+   $(document).on('click', "a", $.proxy(this, 'goto'));
 }
 
 Roadcrew.prototype = {
