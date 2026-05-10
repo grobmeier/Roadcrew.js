@@ -25,3 +25,10 @@ When to use?
 Use it for simple product demos, kiosk applications or anything
 else which needs basic page flipping without dependencies
 or relying on frameworks.
+
+Demo
+----
+
+The demo application lives in `demo/`. Open or serve `demo/index.html`
+to see page switching, interceptors, error handling and lazy-loaded
+partials in action.
