@@ -13,7 +13,7 @@
  *  either express or implied. See the License for the specific
  *  language governing permissions and limitations under the License.
  */
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
     var roadcrew = new Roadcrew();
 
     roadcrew.intercept('#tablePage', function (dispatch) {
@@ -21,8 +21,8 @@ $(document).ready(function () {
         setTimeout(dispatch, 1500);
     });
 
-    var submit = $('#myform').find('[name="submit"]');
-    submit.click(function (event) {
+    var submit = document.querySelector('#myform [name="submit"]');
+    submit.addEventListener('click', function (event) {
         event.preventDefault();
         roadcrew.goto("#tablePage");
     });
@@ -35,7 +35,7 @@ $(document).ready(function () {
     roadcrew.intercept('#troublePage', function (dispatch) {
         throw new RoadcrewError("I made trouble");
     }, function (error) {
-        $('#errorPage').find('.error').html(error.message);
+        document.querySelector('#errorPage .error').innerHTML = error.message;
         roadcrew.flip('#errorPage');
     });
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
     });
 
     roadcrew.globalErrorHandler = function (error) {
-        $('#errorPage').find('.error').html("uncatched error");
+        document.querySelector('#errorPage .error').innerHTML = "uncatched error";
         roadcrew.flip('#errorPage');
     }
 });

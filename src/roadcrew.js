@@ -23,23 +23,34 @@ function RoadcrewError(message, code, rootCause) {
 RoadcrewError.prototype = new Error();
 RoadcrewError.prototype.constructor = RoadcrewError;
 
+function roadcrewAll(selector, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(selector));
+}
+
+function roadcrewOne(selector, root) {
+    return (root || document).querySelector(selector);
+}
+
 function Roadcrew() {
-   $('[data-rc-partial]').addClass("rc-unloaded-partial");
+   roadcrewAll('[data-rc-partial]').forEach(function (element) {
+       element.classList.add("rc-unloaded-partial");
+   });
 
-   this.active = $($('.start')[0]);
-   this.start = "#" + this.active.attr('id');
-   this.active.css('display', 'block');
+   this.active = roadcrewOne('.start');
+   this.start = "#" + this.active.getAttribute('id');
+   this.active.style.display = 'block';
 
-   $(window).bind('popstate', $.proxy(this, 'back'));
-   $(document).on('click', "a", $.proxy(this, 'goto'));
-    $(document).on('click', "button[data-target]", $.proxy(this, 'goto'));
+   window.addEventListener('popstate', this.back.bind(this));
+   document.addEventListener('click', this.goto.bind(this));
 
     // In page templates
-    $.each($('.template-ref'), function (index, value) {
-        var elem = $(value);
-        var target = elem.attr("data-target");
-        if (target !== undefined) {
-            elem.html($("#" + target).html());
+    roadcrewAll('.template-ref').forEach(function (element) {
+        var target = element.getAttribute("data-target");
+        if (target !== null) {
+            var template = document.getElementById(target);
+            if (template !== null) {
+                element.innerHTML = template.innerHTML;
+            }
         }
     });
 }
@@ -70,28 +81,68 @@ Roadcrew.prototype.goto = function (event, data) {
    if(typeof (event) === "string") {
         url = event;
    } else {
-      event.preventDefault();
-      if (event.target.nodeName == 'A' || event.target.nodeName == 'BUTTON') {
-        url = event.target.getAttribute('data-target');
-      } else if($(event.target).parent().prop("tagName") == 'BUTTON' ) {
-          url = $(event.target).parent().attr('data-target');
+      if (event.target.closest === undefined) {
+          return;
       }
+
+      var target = event.target.closest('a, button[data-target]');
+      if (target === null) {
+          return;
+      }
+
+      event.preventDefault();
+      url = target.getAttribute('data-target');
    }
 
    if (url === undefined || url === null) {
        return;
    }
 
-   this.path.push(url);
-
-   var page = $(url);
-   if (page.hasClass("rc-unloaded-partial")) {
-       page.load(page.attr("data-rc-partial"));
-       page.removeClass("rc-unloaded-partial");
+   var page = this.verifyPage(url);
+   if (page === null) {
+       return;
    }
 
-   var interceptor = this.interceptor[url];
+   this.path.push(url);
 
+   this.loadPartial(page, function () {
+       this.dispatch(url, page, data);
+   }.bind(this));
+};
+
+Roadcrew.prototype.loadPartial = function (page, callback) {
+   if (!page.classList.contains("rc-unloaded-partial")) {
+       callback();
+       return;
+   }
+
+   var partialUrl = page.getAttribute("data-rc-partial");
+   if (partialUrl === null) {
+       callback();
+       return;
+   }
+
+   fetch(partialUrl)
+       .then(function (response) {
+           if (!response.ok) {
+               throw new RoadcrewError("Could not load partial", response.status, response);
+           }
+           return response.text();
+       })
+       .then(function (html) {
+           page.innerHTML = html;
+           page.classList.remove("rc-unloaded-partial");
+           callback();
+       })
+       .catch(function (error) {
+           if (this.globalErrorHandler !== null) {
+               this.globalErrorHandler(error);
+           }
+       }.bind(this));
+};
+
+Roadcrew.prototype.dispatch = function (url, page, data) {
+   var interceptor = this.interceptor[url];
    if(interceptor !== undefined) {
        try {
            var dispatcher = Roadcrew.createDispatcher(this, page);
@@ -112,20 +163,31 @@ Roadcrew.prototype.goto = function (event, data) {
 };
 
 Roadcrew.prototype.flip = function (page) {
-   this.active.css('display','none');
+   this.active.style.display = 'none';
    this.active = this.verifyPage(page);
-   this.active.css('display','block');
+   this.active.style.display = 'block';
 };
 
 Roadcrew.prototype.fadeIn = function (page) {
-   this.active.css('display','none');
+   this.active.style.display = 'none';
    this.active = this.verifyPage(page);
-   this.active.fadeIn();
+   this.active.style.opacity = 0;
+   this.active.style.display = 'block';
+
+   var opacity = 0;
+   var step = function () {
+       opacity += 0.1;
+       this.active.style.opacity = opacity;
+       if (opacity < 1) {
+           window.requestAnimationFrame(step);
+       }
+   }.bind(this);
+   window.requestAnimationFrame(step);
 };
 
 Roadcrew.prototype.verifyPage = function(page) {
     if( typeof (page) === "string") {
-        return $(page);
+        return roadcrewOne(page);
     }
     return page;
 };

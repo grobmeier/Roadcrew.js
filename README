@@ -44,9 +44,5 @@ world about my current stack for HTML5 dev on mobile.
 Future
 ------
 
-I plan to remove jQuery in favour to Zepto.js: http://zeptojs.com/
-In other terms: Roadcrew.js will have Zepto.js support too.
-Plans are to keep jQuery support for this library.
-
 For Roadcrew.dart I was thinking about creating bindings for Apache Cordova. That said, Dart is still in
 it early days and the Roadcrew.dart development will reflect that.
