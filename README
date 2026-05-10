@@ -10,6 +10,17 @@ Roadcrew does not allow you to load new divs via Ajax.
 
 Currently there is only one "transition" effect: flip, without anything.
 
+## Features
+
+- Dependency-free vanilla JavaScript
+- Page switching between HTML elements in one document
+- Link and button navigation with `data-target`
+- Lazy-loaded page partials with `data-rc-partial`
+- Interceptors for work that must happen before a page is shown
+- Per-page and global error handlers for interceptor failures
+- Simple template references with `.template-ref`
+- Browser back handling through `popstate`
+
 ## Why?
 
 Roadcrew.js has been developed many years ago because jQuery mobile
