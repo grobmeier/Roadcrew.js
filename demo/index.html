@@ -16,7 +16,7 @@
  */
  -->
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,134 +26,177 @@
     <script type="text/javascript" charset="utf-8" src="../src/roadcrew.js"></script>
     <script type="text/javascript" charset="utf-8" src="app.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="bootstrap-2.0.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="bootstrap-2.0.2/css/bootstrap-responsive.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../src/roadcrew.css"/>
+    <link rel="stylesheet" type="text/css" href="../src/roadcrew.css">
+    <link rel="stylesheet" type="text/css" href="demo.css">
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <span class="brand">Demo App</span>
+<main class="demo-shell">
+    <header class="demo-header">
+        <h1>Roadcrew.js Demo</h1>
+        <p class="intro">Small page switching for plain HTML.</p>
+    </header>
+
+    <section class="page start panel panel-home" id="appPage">
+        <div class="panel-copy">
+            <p class="eyebrow">Start page</p>
+            <h2>Move between pages without a framework.</h2>
+            <p>Each panel is a hidden page. Roadcrew shows one at a time.</p>
         </div>
-    </div>
-</div>
-<div class="container-fluid" style="margin-top: 60px">
-    <!--
-       Page 1: Loading
-    -->
-    <div class="page" id="loadingPage">
-        <div class="span4" align="center">
-            <p>Please wait.</p>
+
+        <form id="myform" class="demo-form" action="#" method="post">
+            <label for="field1">Project name</label>
+            <input type="text" name="field1" id="field1" value="" placeholder="grobmeier.de">
+
+            <label for="field2">Contact person</label>
+            <input type="text" name="field2" id="field2" value="" placeholder="Christian">
+
+            <label class="checkbox-row" for="yesorno">
+                <input type="checkbox" name="yesorno" id="yesorno">
+                <span>Have fun</span>
+            </label>
+
+            <button type="submit" name="submit" class="button button-primary">Submit form</button>
+        </form>
+
+        <nav class="action-grid" aria-label="Demo actions">
+            <a class="button button-secondary" data-target="#tablePage" href="#">Show result</a>
+            <a class="button button-secondary" data-target="#interceptingPage" href="#">Intercepted page</a>
+            <a class="button button-soft" data-target="#sunnyPartialPage" href="#">Load sunny partial</a>
+            <a class="button button-warning" data-target="#troublePage" href="#">Handled error</a>
+            <a class="button button-warning" data-target="#evenMoreTroublePage" href="#">Global error</a>
+        </nav>
+
+        <details class="code-note">
+            <summary>How navigation starts</summary>
+            <pre><code>&lt;a data-target="#tablePage" href="#"&gt;Show table page&lt;/a&gt;
+
+document.addEventListener("DOMContentLoaded", function () {
+    var roadcrew = new Roadcrew();
+});</code></pre>
+        </details>
+    </section>
+
+    <section class="page panel panel-loading" id="loadingPage">
+        <p class="eyebrow">Interceptor</p>
+        <h2>Loading...</h2>
+        <p>The interceptor shows this page before the result.</p>
+        <div class="loader" aria-hidden="true"></div>
+    </section>
+
+    <section class="page panel panel-table" id="tablePage">
+        <p class="eyebrow">Submitted result</p>
+        <h2>Your form content arrived.</h2>
+        <dl class="result-list">
+            <div>
+                <dt>Project name</dt>
+                <dd id="resultProjectName">Not submitted yet</dd>
+            </div>
+            <div>
+                <dt>Contact person</dt>
+                <dd id="resultContactPerson">Not submitted yet</dd>
+            </div>
+            <div>
+                <dt>Have fun</dt>
+                <dd id="resultFriendlyDemo">Not submitted yet</dd>
+            </div>
+        </dl>
+        <div class="button-row">
+            <a class="button button-secondary" data-target="#otherPage" href="#">Go deeper</a>
+            <a class="button button-primary" data-target="#appPage" href="#">Back home</a>
         </div>
-    </div>
 
-    <!--
-        Page 2
-    -->
-    <div class="page start" id="appPage">
-        <div class="span4">
-            <div class="error"></div>
-            <form id="myform" action="#" method="post">
-                <label for="field1">Field 1:</label>
-                <input type="text" name="field1" id="field1" value=""/>
-                <label for="field2">Field 2:</label>
-                <input type="text" name="field2" id="field2" value=""/>
-                <label for="yesorno">Yes or no?</label>
-                <input type="checkbox" name="yesorno" id="yesorno"/>
+        <details class="code-note">
+            <summary>How loading connects to this result</summary>
+            <pre><code>roadcrew.intercept("#tablePage", function (dispatch) {
+    updateResultPage();
+    roadcrew.flip("#loadingPage");
+    setTimeout(dispatch, 1500);
+});</code></pre>
+        </details>
 
-                <br/>
-                <input type="submit" name="submit" class="btn btn-primary" value="Send Data"/>
-            </form>
+        <details class="code-note">
+            <summary>How the form result is created</summary>
+            <pre><code>submit.addEventListener("click", function (event) {
+    event.preventDefault();
+    roadcrew.goto("#tablePage");
+});
 
-            <p><a data-target="#tablePage" href="#">Go to tables</a></p>
-            <p><a data-target="#troublePage" href="#" class="btn btn-danger">This asks for trouble</a></p>
-            <p><a data-target="#evenMoreTroublePage" href="#" class="btn btn-danger">This asks for even more trouble</a></p>
-            <p><a href="#doesNothing" class="btn btn-danger">Does nothing - no data-target</a></p>
-            <p><a data-target="#notDefined" class="btn btn-info">Load partial 1</a></p>
-            <p><a data-target="#notDefined2" class="btn btn-info">Load partial 2</a></p>
-        </div>
-    </div>
+function updateResultPage() {
+    resultProjectName.textContent = field1.value;
+    resultContactPerson.textContent = field2.value;
+}</code></pre>
+        </details>
+    </section>
 
-    <!--
-        Page 3
-    -->
-    <div class="page" id="tablePage">
-        <div class="span4">
-            <table border="1" width="100%">
-                <tr>
-                    <th>Hello</th>
-                    <th>World</th>
-                </tr>
-                <tr>
-                    <td>Value 1</td>
-                    <td>Value 2</td>
-                </tr>
-                <tr>
-                    <td>Value 1</td>
-                    <td>Value 2</td>
-                </tr>
-                <tr>
-                    <td>Value 1</td>
-                    <td>Value 2</td>
-                </tr>
-            </table>
-            <a data-target="#otherPage" href="#">Other page</a>
-            <a data-target="#interceptingPage" href="#">Intercepting page</a>
-        </div>
-    </div>
+    <section class="page panel panel-other" id="otherPage">
+        <p class="eyebrow">Another page</p>
+        <h2>A plain hidden page.</h2>
+        <p>Roadcrew hides the current page and shows this one.</p>
+        <a class="button button-primary" data-target="#tablePage" href="#">Return to table</a>
 
-    <!--
-        Page 3
-    -->
-    <div class="page" id="otherPage">
-        <div class="span12">
-            <h1>Other</h1>
-            <a data-target="#tablePage" href="#">Table page</a>
-        </div>
-    </div>
+        <details class="code-note">
+            <summary>How a normal page is declared</summary>
+            <pre><code>&lt;section class="page panel" id="otherPage"&gt;
+    ...
+&lt;/section&gt;
 
-    <!--
-        Page 4: intercepting
-    -->
-    <div class="page" id="interceptingPage">
-        <div class="span12">
-            <h1>Intercepting</h1>
-            <a data-target="#tablePage" href="#">Table page</a>
-        </div>
-    </div>
+&lt;a data-target="#otherPage" href="#"&gt;Go deeper&lt;/a&gt;</code></pre>
+        </details>
+    </section>
 
-    <!--
-        Page 5: troubling interceptor
-    -->
-    <div class="page" id="troublePage">
-        <div class="span12">
-            <h1>Trouble Page</h1>
-            Show never be visible
-        </div>
-    </div>
+    <section class="page panel panel-intercept" id="interceptingPage">
+        <p class="eyebrow">Intercepted page</p>
+        <h2>An interceptor ran first.</h2>
+        <p>Run code before the page is shown.</p>
+        <a class="button button-primary" data-target="#appPage" href="#">Back home</a>
 
-    <!--
-        Page 6: Should show in case of an error
-    -->
-    <div class="page" id="errorPage">
-        <div class="span12">
-            <h1>Error Page</h1>
-            Mate, you have a problem!<br/>
-            <span class="error">errortext</span>
-            <p><a class="btn btn-primary" data-target="#appPage" href="#">Home</a></p>
-        </div>
-    </div>
+        <details class="code-note">
+            <summary>How an interceptor continues navigation</summary>
+            <pre><code>roadcrew.intercept("#interceptingPage", function (dispatch) {
+    console.log("Intercepting");
+    dispatch();
+});</code></pre>
+        </details>
+    </section>
 
-    <div class="page" id="evenMoreTroublePage">
-        <div class="span12">
-            <h1>Extrem Trouble Page</h1>
-            Show never be visible
-        </div>
-    </div>
+    <section class="page panel panel-hidden" id="troublePage">
+        <h2>This page should not become visible.</h2>
+    </section>
 
-    <div class="page" id="notDefined" data-rc-partial="partial1.html"></div>
-    <div class="page" id="notDefined2" data-rc-partial="partial2.html"></div>
-</div>
+    <section class="page panel panel-error" id="errorPage">
+        <p class="eyebrow">Error handling</p>
+        <h2>Something was caught.</h2>
+        <p class="error">Error text</p>
+        <a class="button button-primary" data-target="#appPage" href="#">Back home</a>
+
+        <details class="code-note">
+            <summary>How errors can route to this page</summary>
+            <pre><code>roadcrew.intercept("#troublePage", function () {
+    throw new RoadcrewError("I made trouble");
+}, function (error) {
+    errorText.textContent = error.message;
+    roadcrew.flip("#errorPage");
+});</code></pre>
+        </details>
+    </section>
+
+    <section class="page panel panel-hidden" id="evenMoreTroublePage">
+        <h2>This page should not become visible either.</h2>
+    </section>
+
+    <section class="page panel" id="sunnyPartialPage" data-rc-partial="./partial2.html"></section>
+
+    <template id="sunnyPartialFallback">
+        <p class="eyebrow">Another partial</p>
+        <h2>Sunny partial loaded.</h2>
+        <p>Fallback content for local file use.</p>
+        <a class="button button-primary" data-target="#appPage" href="#">Back home</a>
+        <details class="code-note">
+            <summary>How partial loading is declared</summary>
+            <pre><code>&lt;section class="page" id="sunnyPartialPage"
+    data-rc-partial="./partial2.html"&gt;&lt;/section&gt;</code></pre>
+        </details>
+    </template>
+</main>
 </body>
 </html>
