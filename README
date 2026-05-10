@@ -1,5 +1,4 @@
-Roadcrew.js
-===========
+# Roadcrew.js
 
 Roadcrew.js is a dependency-free vanilla JavaScript snippet which allows
 "page transitions" like in jQuery mobile. It means,
@@ -11,23 +10,20 @@ Roadcrew does not allow you to load new divs via Ajax.
 
 Currently there is only one "transition" effect: flip, without anything.
 
-Why?
-----
+## Why?
 
 Roadcrew.js has been developed because jQuery mobile
 was very slow on my mobiles. The only feature I would
 miss was the page feature, which is now available with
 Roadcrew.js.
 
-When to use?
-------------
+## When to use?
 
 Use it for simple product demos, kiosk applications or anything
 else which needs basic page flipping without dependencies
 or relying on frameworks.
 
-Demo
-----
+## Demo
 
 The demo application lives in `demo/`. Open or serve `demo/index.html`
 to see page switching, interceptors, error handling and lazy-loaded
