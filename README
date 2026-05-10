@@ -12,7 +12,7 @@ Currently there is only one "transition" effect: flip, without anything.
 
 ## Why?
 
-Roadcrew.js has been developed because jQuery mobile
+Roadcrew.js has been developed many years ago because jQuery mobile
 was very slow on my mobiles. The only feature I would
 miss was the page feature, which is now available with
 Roadcrew.js.
