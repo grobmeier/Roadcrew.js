@@ -1,20 +1,15 @@
-Roadcrew.js / Roadcrew.dart
-===========================
+Roadcrew.js
+===========
 
-Roadcrew.js is a simple JavaScript snippet which allows
+Roadcrew.js is a dependency-free vanilla JavaScript snippet which allows
 "page transitions" like in jQuery mobile. It means,
 you can have multiple divs in a HTML5 document which
 serve as "pages". Roadcrew.js allows you to navigate
 between them.
 
-Roadcrew.dart is the same, just in Dart (http://www.dartlang.org).
-Personally I think this language is just great and I really enjoyed
-working with it.
-
 Roadcrew does not allow you to load new divs via Ajax.
 
 Currently there is only one "transition" effect: flip, without anything.
-
 
 Why?
 ----
@@ -24,25 +19,9 @@ was very slow on my mobiles. The only feature I would
 miss was the page feature, which is now available with
 Roadcrew.js.
 
-Roadcrew.dart has been developed because I love Dart.
+When to use?
+------------
 
-
-Current stack for mobile
-------------------------
-
-Not that anybody wants to hear it. Lucky me, README files can be huge. So I can tell the
-world about my current stack for HTML5 dev on mobile.
-
-- Apache Cordova (was Phonegap)
-- Roadcrew.js
-- Promise.js (https://github.com/stackp/promisejs) for AJAX (see also: http://bit.ly/HbKRU4)
-- Twitter Bootstrap
-- jQuery
-
-
-
-Future
-------
-
-For Roadcrew.dart I was thinking about creating bindings for Apache Cordova. That said, Dart is still in
-it early days and the Roadcrew.dart development will reflect that.
+Use it for simple product demos, kiosk applications or anything
+else which needs basic page flipping without dependencies
+or relying on frameworks.
